@@ -8,17 +8,24 @@ export default tseslint.config(
   { ignores: ['dist'] },
   {
     extends: [js.configs.recommended,
-      ...tseslint.configs.recommended,
+    ...tseslint.configs.recommendedTypeChecked,
+    ...tseslint.configs.stylisticTypeChecked,
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      'jsx-a11y': jsxA11y
+      'jsx-a11y': jsxA11y,
+      'react-x': reactX,
+      'react-dom': reactDom,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -26,7 +33,9 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
-      ...jsxA11y.configs.recommended.rules
+      ...jsxA11y.configs.recommended.rules,
+      ...reactX.configs['recommended-typescript'].rules,
+      ...reactDom.configs.recommended.rules,
     },
   },
 )
