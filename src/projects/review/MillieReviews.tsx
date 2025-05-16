@@ -1,25 +1,11 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { StarRating } from "../../components/StarRatings/StarRating";
+import { StarRating } from "../../components/starRatings/StarRating";
 import "./MillieReview.css";
 interface Review {
   title: string;
   body: string;
   rating: number | null;
 }
-
-const sampleReview: Review = {
-  title: "Sunny Tail Handless Leashes",
-  body: "Best Leash ever! Stylish, durable, and easy to use. Millie has had this leash since she was a baby and we have gotten few more colors!",
-  rating: 4,
-};
-
-const emptyFormData = { title: "", body: "", rating: null };
-
-type FormErrors = {
-  title?: string;
-  body?: string;
-  rating?: string;
-};
 
 interface ReviewCardProps {
   review: Review;
@@ -35,13 +21,22 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
   );
 };
 
+const sampleReview: Review = {
+  title: "Sunny Tail Handless Leashes",
+  body: "Best Leash ever! Stylish, durable, and easy to use. Millie has had this leash since she was a baby and we have gotten few more colors!",
+  rating: 4,
+};
+
+const emptyFormData = { title: "", body: "", rating: null };
+
+type FormErrors = {
+  title?: string;
+  body?: string;
+  rating?: string;
+};
 function MillieReviews() {
   let [reviews, setReviews] = useState([sampleReview]);
-  let [formData, setFormData] = useState<Review>({
-    title: "",
-    body: "",
-    rating: null,
-  });
+  let [formData, setFormData] = useState<Review>(emptyFormData);
   let [errorState, setErrors] = useState({});
 
   const handleFormChange = (
@@ -84,27 +79,15 @@ function MillieReviews() {
       setReviews(() => {
         return [...reviews, formData];
       });
-      setFormData({
-        title: "",
-        body: "",
-        rating: null,
-      });
+      setFormData(emptyFormData);
     }
   };
 
   return (
     <div id="millie-review-app">
-      Millie's Product Reviews
-      <div className="review--content">
-        <div>
-          Reviews
-          <ul className="review--list">
-            {reviews.map((each, i) => (
-              <ReviewCard key={i} review={each} />
-            ))}
-          </ul>
-        </div>
+      <h3 className="rasa-mini-header"> Millie's Product Reviews</h3>
 
+      <div className="review--content">
         <form className="review--form" onSubmit={handleSubmit}>
           <h5>Submit a Review</h5>
           <div className="review--input">
@@ -140,6 +123,14 @@ function MillieReviews() {
 
           <button type="submit">Submit</button>
         </form>
+
+        <div>
+          <ul className="review--list">
+            {reviews.map((each, i) => (
+              <ReviewCard key={`review-${i}`} review={each} />
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

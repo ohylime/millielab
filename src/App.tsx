@@ -1,7 +1,7 @@
 import { useState, JSX } from "react";
 import "./App.css";
 
-import { Button } from "./components/buttons/Button";
+import { Button } from "./components/index";
 import { Home } from "./pages/Home";
 import MillieReviews from "./projects/review/MillieReviews";
 
@@ -38,16 +38,16 @@ const allDisplays = [...views, ...components, ...projects].reduce(
 );
 
 function App() {
-  let [display, setDisplay] = useState<string>("BUTTON");
+  let [display, setDisplay] = useState<string>("MILLIEREVIEWS");
 
   return (
     <>
-      <header className="header"> Header </header>
+      <header className="header"> Millie's Lab </header>
       <nav className="side-bar">
         <ul>
           <h4>Views</h4>
           {views.map(({ key, label }) => (
-            <li key={key}>
+            <li key={key} className="item">
               <div onClick={() => setDisplay(key)}>{label}</div>
             </li>
           ))}
@@ -55,7 +55,7 @@ function App() {
           <h4>Components</h4>
 
           {components.map(({ key, label }) => (
-            <li key={key}>
+            <li key={key} className="item">
               <div onClick={() => setDisplay(key)}>{label}</div>
             </li>
           ))}
@@ -63,14 +63,14 @@ function App() {
           <h4>Mini Projects</h4>
 
           {projects.map(({ key, label }) => (
-            <li key={key}>
+            <li key={key} className="item">
               <div onClick={() => setDisplay(key)}>{label}</div>
             </li>
           ))}
         </ul>
       </nav>
       <div className="display">{allDisplays[display]}</div>
-      <footer className="footer">Footer </footer>
+      <footer className="footer"> Millie 2025 </footer>
     </>
   );
 }
