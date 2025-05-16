@@ -1,0 +1,78 @@
+#millie-review-app {
+  height: 100%;
+  width: 100%;
+}
+
+.review--content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.review--list {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  width: 100%;
+
+  margin: 16px;
+}
+
+.review--card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 15%;
+  padding: 8px;
+
+  width: 150px;
+  height: 150px;
+
+  h5 {
+    text-align: center;
+    margin: 0;
+    font-size: 1em;
+  }
+  p {
+    font-size: 10px;
+  }
+}
+
+.review--form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  min-width: 25%;
+  width: fit-content;
+  height: fit-content;
+  border: solid black 1px;
+
+  button {
+    align-self: center;
+    width: 100px;
+  }
+}
+
+.review--input {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+
+  padding: 8px;
+  margin: 0px 16px;
+
+  label {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  input {
+    min-width: 200px;
+    min-height: 25px;
+  }
+}

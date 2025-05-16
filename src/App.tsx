@@ -1,34 +1,49 @@
-import { useState, JSX } from 'react'
-import './App.css'
+import { useState, JSX } from "react";
+import "./App.css";
 
-import { Button } from './components/buttons/Button'
-import { Home } from './Pages/Home'
+import { Button } from "./components/buttons/Button";
+import { Home } from "./pages/Home";
+import MillieReviews from "./projects/review/MillieReviews";
 
+interface Display {
+  key: string;
+  label: string;
+  component: JSX.Element;
+  type: string;
+}
 
-const views: { key: string, label: string, component: JSX.Element }[] = [
-  { key: 'HOME', label: 'Home', component: <Home /> },
-]
+const views: Display[] = [
+  { key: "HOME", label: "Home", component: <Home />, type: "page" },
+];
 
+const components: Display[] = [
+  { key: "BUTTON", label: "Button", component: <Button />, type: "component" },
+];
 
-const components: { key: string, label: string, component: JSX.Element }[] = [
-  { key: 'BUTTON', label: 'Button', component: <Button /> },
-]
+const projects: Display[] = [
+  {
+    key: "MILLIEREVIEWS",
+    label: "Millie's Reviews",
+    component: <MillieReviews />,
+    type: "project",
+  },
+];
 
-
-
-const allDisplays = [...views, ...components].reduce((acc, { key, component }) => {
-  acc[key] = component
-  return acc
-}, {} as Record<string, JSX.Element>)
+const allDisplays = [...views, ...components, ...projects].reduce(
+  (acc, { key, component }) => {
+    acc[key] = component;
+    return acc;
+  },
+  {} as Record<string, JSX.Element>
+);
 
 function App() {
-  let [display, setDisplay] = useState<string>('BUTTON')
+  let [display, setDisplay] = useState<string>("BUTTON");
 
   return (
     <>
       <header className="header"> Header </header>
-      <nav className='side-bar'>
-
+      <nav className="side-bar">
         <ul>
           <h4>Views</h4>
           {views.map(({ key, label }) => (
@@ -45,20 +60,19 @@ function App() {
             </li>
           ))}
 
+          <h4>Mini Projects</h4>
+
+          {projects.map(({ key, label }) => (
+            <li key={key}>
+              <div onClick={() => setDisplay(key)}>{label}</div>
+            </li>
+          ))}
         </ul>
-
-      </nav >
-      <div className='display'>
-
-
-        <div className='card'>
-
-          {allDisplays[display]}
-        </div>
-      </div>
-      <footer className='footer'>Footer </footer>
+      </nav>
+      <div className="display">{allDisplays[display]}</div>
+      <footer className="footer">Footer </footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

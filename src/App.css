@@ -1,16 +1,18 @@
+:root {
+  interpolate-size: allow-keywords;
+}
 #root {
   max-width: inherit;
   min-height: inherit;
   text-align: center;
 
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: 10% auto;
   grid-template-rows: 75px 10fr 50px;
   grid-template-areas:
     "header header header header"
     "nav main main main"
     "footer footer footer footer";
-  grid-gap: 8px;
 }
 
 .header {
@@ -44,7 +46,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .footer {
@@ -64,7 +65,6 @@
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
-
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
