@@ -42,7 +42,7 @@ export const StarRating: React.FC<StarRatingProps> = ({
             {(hover ?? rating ?? 0) >= value ? (
               <StarFilledIcon
                 color="#646cff"
-                onClick={() => handleOnClick(i)}
+                onClick={() => handleOnClick(value)}
                 onMouseEnter={() => {
                   onHover(value);
                 }}

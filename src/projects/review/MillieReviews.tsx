@@ -30,10 +30,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
     <div className="review--card">
       <h5>{review.title}</h5>
       <StarRating rating={review.rating} isDisabled={true} />
-      <p>
-        {" "}
-        {review.body} {review.rating}{" "}
-      </p>
+      <p>{review.body}</p>
     </div>
   );
 };

@@ -6,16 +6,15 @@
 .review--content {
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 75% 25%;
 }
 
 .review--list {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  width: 100%;
+  grid-column-start: 1;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
 
   margin: 16px;
 }
@@ -23,14 +22,16 @@
 .review--card {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: flex-start; /* not "left" */
   justify-content: center;
-  border: 1px solid black;
-  border-radius: 15%;
-  padding: 8px;
 
   width: 150px;
   height: 150px;
+  margin: 8px;
+  padding: 8px;
+
+  border: 1px solid black;
+  border-radius: 15%;
 
   h5 {
     text-align: center;
@@ -39,10 +40,12 @@
   }
   p {
     font-size: 10px;
+    width: fit-content;
   }
 }
 
 .review--form {
+  grid-column-start: 2;
   display: flex;
   flex-direction: column;
   justify-content: start;
