@@ -73,8 +73,8 @@ function MillieReviews() {
     // Validate
     let newErrors: FormErrors = {};
     if (!formData.title.trim()) newErrors.title = "Title is Required";
-    if (!formData.body.trim()) newErrors.body = "Body is Required";
-    if (formData.rating === null) newErrors.rating = "Rating is Required";
+    if (!formData.body.trim()) newErrors.body = "Required";
+    if (formData.rating === null) newErrors.rating = "Required";
 
     // SetErrors
     if (Object.keys(newErrors).length) {
@@ -114,11 +114,17 @@ function MillieReviews() {
               type="text"
               onChange={handleFormChange}
               value={formData.title}
-            ></input>
+            />
+            <span className="review--error">
+              {errorState.title ? errorState.title : ""}
+            </span>
           </div>
           <div className="review--input">
             <label htmlFor="ratings">Ratings</label>
             <StarRating rating={formData.rating} onUpdate={handleRating} />
+            <span className="review--error">
+              {errorState.rating ? errorState.rating : ""}
+            </span>
           </div>
           <div className="review--input">
             <label htmlFor="title">Review</label>
@@ -126,7 +132,10 @@ function MillieReviews() {
               name="body"
               onChange={handleFormChange}
               value={formData.body}
-            ></textarea>
+            />
+            <span className="review--error">
+              {errorState.body ? errorState.body : ""}
+            </span>
           </div>
 
           <button type="submit">Submit</button>

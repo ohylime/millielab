@@ -54,10 +54,14 @@
   width: fit-content;
   height: fit-content;
   border: solid black 1px;
+  border-radius: 10px;
 
   button {
     align-self: center;
     width: 100px;
+
+    margin: 8px;
+    border: 1px solid;
   }
 }
 
@@ -78,4 +82,9 @@
     min-width: 200px;
     min-height: 25px;
   }
+}
+
+.review--error {
+  color: red;
+  font-size: small;
 }
