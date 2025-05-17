@@ -1,30 +1,13 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { StarRating } from "../../components/starRatings/StarRating";
+import { Review, ReviewCard } from "./components/ReviewCard";
 import "./MillieReview.css";
-interface Review {
-  title: string;
-  body: string;
-  rating: number | null;
-}
-
-interface ReviewCardProps {
-  review: Review;
-}
-
-const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
-  return (
-    <div className="review--card">
-      <h5>{review.title}</h5>
-      <StarRating rating={review.rating} isDisabled={true} />
-      <p>{review.body}</p>
-    </div>
-  );
-};
 
 const sampleReview: Review = {
   title: "Sunny Tail Handless Leashes",
   body: "Best Leash ever! Stylish, durable, and easy to use. Millie has had this leash since she was a baby and we have gotten few more colors!",
   rating: 4,
+  id: "1",
 };
 
 const emptyFormData = { title: "", body: "", rating: null };
@@ -35,9 +18,18 @@ type FormErrors = {
   rating?: string;
 };
 function MillieReviews() {
-  let [reviews, setReviews] = useState([sampleReview]);
-  let [formData, setFormData] = useState<Review>(emptyFormData);
+  let [reviews, setReviews] = useState(() => {
+    let data = localStorage.getItem("millieReviews");
+    let parsed = data ? JSON.parse(data) : [];
+    return parsed.length ? parsed : [sampleReview];
+  });
+
+  let [formData, setFormData] = useState(emptyFormData);
   let [errorState, setErrors] = useState({});
+
+  useEffect(() => {
+    localStorage.setItem("millieReviews", JSON.stringify(reviews));
+  }, [reviews]);
 
   const handleFormChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -77,10 +69,15 @@ function MillieReviews() {
     } else {
       setErrors({});
       setReviews(() => {
-        return [...reviews, formData];
+        return [...reviews, { ...formData, id: crypto.randomUUID() }];
       });
       setFormData(emptyFormData);
     }
+  };
+
+  const removeReview = (id: string) => {
+    const newReviews = reviews.filter((each: Review) => each.id !== id);
+    setReviews(newReviews);
   };
 
   return (
@@ -126,8 +123,8 @@ function MillieReviews() {
 
         <div>
           <ul className="review--list">
-            {reviews.map((each, i) => (
-              <ReviewCard key={`review-${i}`} review={each} />
+            {reviews.map((each) => (
+              <ReviewCard key={each.id} review={each} remove={removeReview} />
             ))}
           </ul>
         </div>
