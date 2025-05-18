@@ -7,7 +7,7 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: 45% 55%;
+  grid-template-columns: 30% 70%;
 }
 
 .review--list {
@@ -39,8 +39,11 @@
     font-size: 1em;
   }
   p {
-    font-size: 10px;
     width: fit-content;
+
+    font-size: 10px;
+    text-wrap: wrap;
+    word-break: break-all;
   }
 }
 .review--card-header {

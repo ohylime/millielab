@@ -4,6 +4,7 @@ import "./App.css";
 import { Button } from "./components/index";
 import { Home } from "./pages/Home";
 import MillieReviews from "./projects/review/MillieReviews";
+import MillieCareers from "./projects/signup/MillieCareers";
 
 interface Display {
   key: string;
@@ -27,6 +28,12 @@ const projects: Display[] = [
     component: <MillieReviews />,
     type: "project",
   },
+  {
+    key: "MILLECAREERS",
+    label: "Millie Career Page",
+    component: <MillieCareers />,
+    type: "project",
+  },
 ];
 
 const allDisplays = [...views, ...components, ...projects].reduce(
@@ -38,7 +45,7 @@ const allDisplays = [...views, ...components, ...projects].reduce(
 );
 
 function App() {
-  let [display, setDisplay] = useState<string>("MILLIEREVIEWS");
+  let [display, setDisplay] = useState<string>("MILLECAREERS");
 
   return (
     <>
